@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ template "dashboard.fullname" . }}
+  labels:
+    app: {{ template "dashboard.name" . }}
+    chart: {{ template "dashboard.chart" . }}
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+{{- if .Values.service.annotations }}
+  annotations:
+{{ toYaml .Values.service.annotations | indent 4 }}
+{{- end }}
+spec:
+  ports:
+  - name: http
+    port: 8000
+    protocol: TCP
+  type: {{.Values.service.type }}
+  selector:
+    app: {{ template "dashboard.name" . }}
+    release: {{ .Release.Name }}

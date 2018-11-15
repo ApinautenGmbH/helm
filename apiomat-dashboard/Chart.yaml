@@ -1,0 +1,17 @@
+name: apiomat-dashboard
+version: 0.2.1
+appVersion: 3.2.2
+description: Dashboard for the ApiOmat rest interface Yambas
+keywords:
+- dashboard
+- apiomat
+- backend
+- lowcode
+- yambas
+home: https://apiomat.com
+#icon: 
+#sources:
+#- 
+maintainers:
+- name: ApiOmat
+  email: containers@apiomat.com

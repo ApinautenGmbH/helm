@@ -1,0 +1,40 @@
+apiVersion: v1
+entries:
+  apiomat-dashboard:
+  - appVersion: 3.2.2
+    created: 2018-11-01T13:27:01.746647+01:00
+    description: Dashboard for the ApiOmat rest interface Yambas
+    digest: 3af4a82642f4a109b7f81f84d6d1c19cf09926f4c5657cb6763aa56360d3a507
+    home: https://apiomat.com
+    keywords:
+    - dashboard
+    - apiomat
+    - backend
+    - lowcode
+    - yambas
+    maintainers:
+    - email: containers@apiomat.com
+      name: ApiOmat
+    name: apiomat-dashboard
+    urls:
+    - apiomat-dashboard-0.2.1.tgz
+    version: 0.2.1
+  apiomat-yambas:
+  - appVersion: 3.1.2
+    created: 2018-11-01T13:27:01.748765+01:00
+    description: Rest Interface Yambas
+    digest: 849fc079f30a24be9846f5be294946bb947f8d1206246e8f2b6fb29a27e3de16
+    home: https://apiomat.com
+    keywords:
+    - apiomat
+    - backend
+    - lowcode
+    - yambas
+    maintainers:
+    - email: containers@apiomat.com
+      name: ApiOmat
+    name: apiomat-yambas
+    urls:
+    - apiomat-yambas-0.2.1.tgz
+    version: 0.2.1
+generated: 2018-11-01T13:27:01.745426+01:00

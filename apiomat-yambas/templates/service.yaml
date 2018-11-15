@@ -1,0 +1,27 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ template "yambas.fullname" . }}
+  labels:
+    app: {{ template "yambas.name" . }}
+    chart: {{ template "yambas.chart" . }}
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+{{- if .Values.service.annotations }}
+  annotations:
+{{ toYaml .Values.service.annotations | indent 4 }}
+{{- end }}
+spec:
+  ports:
+  - name: yambas-tomcat
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
+  - name: yambas-ajp
+    port: 10009
+    protocol: TCP
+    targetPort: 10009
+  type: {{.Values.service.type }}
+  selector:
+    app: {{ template "yambas.name" . }}
+    release: {{ .Release.Name }}

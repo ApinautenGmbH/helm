@@ -1,0 +1,14 @@
+{{- if .Values.configmap }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app: {{ template "yambas.name" . }}
+    chart: {{ template "yambas.chart" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ template "yambas.fullname" . }}
+data:
+  apiomat.yaml: |-
+{{ toYaml .Values.configmap | indent 4 }}
+{{- end }}

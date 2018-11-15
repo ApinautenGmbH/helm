@@ -1,0 +1,146 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ template "yambas.name" . }}
+    chart: {{ template "yambas.chart" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ template "yambas.fullname" . }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "yambas.name" . }}
+      chart: {{ template "yambas.chart" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "yambas.name" . }}
+        chart: {{ template "yambas.chart" . }}
+        release: {{ .Release.Name }}
+      {{- if .Values.podAnnotations }}
+      annotations:
+{{ toYaml .Values.podAnnotations | indent 8 }}
+      {{- end }}
+    spec:
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+      {{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+      {{- range .Values.image.pullSecrets }}
+        - name: {{ . }}
+      {{- end}}
+      {{- end }}
+      containers:
+      - name: {{ template "yambas.name" . }}
+        image: {{ template "yambas.image" . }}
+        ports:
+        - containerPort: 8081
+          name: tomcat
+        - containerPort: 10009
+          name: ajp
+        - containerPort: 10021
+          name: ftp-active
+        - containerPort: 10300
+          name: ftp-passive
+        env:
+        - name: JAVA_XMS
+          value: {{ .Values.javaxms | quote }}
+        {{- if .Values.hazelcast }}
+        - name: HAZELCAST_DISCOVERY
+          value: {{ .Values.hazelcast.discovery | quote }}
+        - name: HAZELCAST_USERNAME
+          value: {{ .Values.hazelcast.username | quote }}
+        - name: HAZELCAST_PASSWORD
+          value: {{ .Values.hazelcast.password | quote }}
+        {{- if .Values.hazelcast.consul }}
+        - name: CONSUL_HOST
+          value: {{ .Values.hazelcast.consul.host | default "consul-ui" | quote }}
+        - name: CONSUL_PORT
+          value: {{ .Values.hazelcast.consul.port | default "8500" | quote }}
+        - name: CONSUL_SERVICE
+          value: {{ .Values.hazelcast.consul.service | default "apiomat" | quote }}
+        - name: CONSUL_DELAY_MS
+          value: {{ .Values.hazelcast.consul.delay_in_ms | default "0" | quote }}
+        {{- if .Values.hazelcast.consul.service_tags }}
+        - name: CONSUL_SERVICE_TAGS
+          value: {{ .Values.hazelcast.consul.service_tags | default "" | quote }}
+        {{- end }}
+        {{- end }}
+        {{- end }}
+        {{- if .Values.log4j}}
+        - name: LOG4J_LEVEL_HAZELCAST
+          value: {{ .Values.log4j.hazelcast | default "error" | lower | quote }}
+        - name: LOG4J_LEVEL_JERSEY
+          value: {{ .Values.log4j.jersey | default "error" | lower | quote }}
+        - name: LOG4J_LEVEL_MONGODB
+          value: {{ .Values.log4j.mongodb | default "error" | lower | quote }}
+        - name: LOG4J_LEVEL_APIOMAT
+          value: {{ .Values.log4j.apiomat | default "error" | lower | quote }}
+        {{- end }}
+        - name: DEBUG
+          value: {{ .Values.debug | default "false" | quote }}
+        {{- if .Values.debugport}}
+        - name: DEBUG_PORT
+          value: {{ .Values.debugport | default "8082" | quote }}
+        {{- end }}
+        {{- if .Values.wait_for_mongodb}}
+        - name: WAIT_FOR_MONGODB
+          value: {{ .Values.wait_for_mongodb | default "false" | quote }}
+        {{- end }}
+        {{- if .Values.configmap }}
+        - name: USE_EXISTING_CONFIG
+          value: "true"
+        {{- end }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        {{- if .Values.livenessProbe.enabled }}
+        livenessProbe:
+          httpGet:
+            path: /yambas/rest
+            port: 8081
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: /yambas/rest
+            port: 8081
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.configmap }}
+        volumeMounts:
+        - name: config
+          mountPath: /etc/apiomat/apiomat.yaml
+          subPath: apiomat.yaml
+        {{- end }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          capabilities: {  }
+          privileged: false
+      {{- if .Values.configmap }}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ template "yambas.fullname" . }}
+      {{- end }}

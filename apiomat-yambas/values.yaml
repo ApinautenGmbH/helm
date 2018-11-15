@@ -1,0 +1,387 @@
+image:
+  ## ApiOmat Registry Url
+  ##
+  registry: docker.io
+  ## ApiOmat Dashboard image name
+  ##
+  repository: apiomat/alpine-yambas
+  ## ApiOmat Dashboard image tag
+  ## ref: https://hub.docker.com/r/apiomat/alpine-dashboard/tags/
+  ##
+  tag: 3.1.2
+
+  ## Specify a imagePullPolicy
+  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: Always
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ##
+  pullSecrets:
+    - <your-nickname>
+
+replicas: 2
+
+javaxms: 8000m
+debug: false
+#debug_port: 8082
+wait_for_mongodb: false
+hazelcast:
+  discovery: consul
+#  username: dev
+#  password: dev
+  consul:
+    host: <consul-ui-service>
+    port: 8500
+    service: apiomat
+    delay_in_ms: 1
+    service_tags: "apiomat"
+
+log4j:
+  hazelcast: error
+  jersey: error
+  mongodb: error
+  apiomat:  error
+
+
+## Kubernetes service type
+service:
+  annotations: {}
+  type: ClusterIP
+
+  ## Specify the nodePort value for the LoadBalancer and NodePort service types.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
+  ##
+  # nodePort:
+
+# Annotations to be added to Dashboard pods
+podAnnotations: {}
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  limits:
+  #  cpu: 500m
+    memory: 8Gi
+  requests:
+#   cpu: 100m
+    memory: 8Gi
+
+## Node selector
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
+nodeSelector: {}
+
+## Affinity
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+affinity: {}
+
+## Tolerations
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+tolerations: []
+
+## Configure extra options for liveness and readiness probes
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes)
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 180
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 180
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+# Entries for the Yambas config file
+configmap:
+  common:
+    hosts:
+      # the internal address yambas and the dashboard uses to reach itself
+      admin: http://localhost:8081
+      # the public address for the live system, used e.g. in sdks or app-configuration 
+      live: https://example.domain
+      # the public address for the staging system, used e.g. in sdks or app-configuration 
+      staging: https://example.domain
+      # the public address for the test system, used e.g. in sdks or app-configuration 
+      test: https://example.domain
+    emails:
+      # the email's sender address ("from") used to send admin emails 
+      admin: admin@example.domain
+      # the support-email address (e.g. used as sender for "forgot password"-requests)
+      support: support@example.domain
+      # the noreply-email address 
+      noreply: noreply@example.domain
+      # the message footer for emails if not sent over mandrill
+      footer:
+      # debug option to print verbose information during email sending
+      debug: true 
+      # Hostname of the SMTP server
+      host: localhost
+      # Username if authentication on SMTP server is necessary
+      #user:
+      # Password if authentication on SMTP server is necessary
+      #password:
+      # Port of the SMTP server
+      port: 25
+      # TRUE if authentication is needed in SMTP server
+      useAuth: false
+      # TRUE if SSL connection should be used
+      useSsl: false
+      # TRUE if STARTTLS should be used
+      useStarttls: false
+    # Settings for the ApiOmat-Analytics module
+#    analytics:
+#      hosts:
+        # The internal address from which the analytics instance is available
+        # defaults to http://localhost:3000
+#        internal: http://localhost:3000
+        # The external address where the instance is available, used for sdks
+        # defaults to http://localhost:3000
+#        public: http://localhost:3000
+    audit:
+      # enables the audit-feature; it is disabled by default 
+      enabled: false
+      # enables writing the create/update data to the log
+      contentEnabled: true
+    # rewrite urls with https, deprecated; defaults to false
+    useSsl: false
+    # indicates whether ApiOmat is started as enterprise version; defaults to false
+    isEnterpriseInstallation: true
+    # indicates whether ApiOmat is started as whitelabel version; defaults to false
+    isWhitelabelInstallation: false
+    # If you change the SuperAdmin credentials in the Dashboard, the credentials below must match them
+    # defaults to apinaut@apiomat.com
+    superadminEmail: apinaut@example.domain
+    # the email address of the default organization; defaults to org@apiomat.com
+    defaultOrganizationEmail: org@example.domain
+    # sends the verification emails immediately; defaults to false 
+    sendCustomerVerificationMailImmediately: false
+
+  # yambas settings  
+  yambas:
+    # the path to WebAppDir of yambas, used to set the read-FilePermission 
+    # as part of the default permissions in the AccessControlContext
+    # defaults to "<<ALL FILES>>" if unset
+    #yambasWebappDir: <<ALL FILES>>
+    # caches the cluster-urls internally in a map (during lifetime of yambas)
+    # defaults to false
+    noSystemCache: false
+    # The configEncryptionKey used for encryption of e.g. module configuration passwords. It gets overwritten by 
+    # a randomly generated value during installation. Should be 16, 24 or 32 characters long. Other lengths get 
+    # trimmed to the next lower valid length. After installation, when this value is the randomly generated one, 
+    # it must not be changed when updating yambas!
+    #configEncryptionKey: changeMe
+    # enables csv-import for the same resource at a time
+    # defaults to false
+    enableMultipleCSVImport: false
+    # sends the verification emails immediately; defaults to false 
+    # (NOTE: this property is deprecated -as also used by dashboard- and will be removed in future releases;
+    # use common.sendCustomerVerificationMailImmediately instead!)
+    sendCustomerVerificationMailImmediately: false
+    # You can set a list of URIs that will be the only allowed origins when CORS requests get received
+    # E.g.: "http://localhost, http://some.host, https://other.secure.domain, file://"
+    # "*" allows all origins (but must be valid URIs). "none" or an empty value allows NO CORS requests. Default is "*".
+    accessControlAllowOriginList: "*"
+    # Comma separated list of modules to attach to all apps by default (like the "Basics" module)
+    defaultModules: Basics
+
+    defaultModulesPerSystem:
+      # Comma separated list of modules to attach to all apps by default for the specific system
+      #live:
+      #staging:
+      #test:
+    # the time between one LogSaveTimer (for async save of logs in native modules) start and another in seconds
+    # defaults to 30 seconds
+    logTaskPeriodInSeconds: 30
+    # The number of threads being used for executing CRON hooks. Default is 10.
+    # Note: For a CRON hook to be executed in a new thread at all, the module must be configured with
+    # "runCronInNewThread = true" in its "@Module" annotation.
+    # Otherwise the hooks get executed by one single CRON timer thread, one after another. 
+    #cronThreads: 10
+    # use of old classloader behaviour
+    #useOldClassloader: false
+    # cache already requested resource files of the module internally, defaults to true, 
+    # size can be adjusted with the property yambas.limits.cacheResourcesInClassloader
+    #cacheResourcesInClassloader: true
+    
+    limits:
+      # number of days a customer can be unconfirmed, until he will be locked 
+      # (only for non-enterprise installation)
+      unconfirmedMaxdays: 7
+      # Maxmum number of milliseconds a cron task execution is allowed to take, 
+      # defaults to Long.MAX_VALUE if unset
+      maxCronTime: 99999999
+      # The maximum number of items to be included in the result of getAll requests; 
+      # defaults to 1000
+      maxResults: 10000
+      # The maximum number of minutes which is allowed for a module to compile
+      maxCompileTimeInMinutes: 5
+      # The maximum size of strings to be exported using CSV or XML export; 
+      # defaults to 100000
+      maxStringSizeOnExport: 100000
+      # The maximum KB size of static data (e.g. images) which should be returned
+      # directly in JSON data
+      maxDataJsonKB: 1000
+      # The maximum data size for uploads in MB (with 1 MB = 1,000,000 Bytes)
+      maxDataUploadMB: 200
+      # The maximum depth in hook method calls
+      maxHookCallDepth: 20
+      # maximum size of a file in kb to be put in the resource cache, defaults to 10 (only takes effect 
+      # if yambas.cacheResourcesInClassloader is enabled)
+      maxResourceCacheSizeKB: 10
+      # maximum deploy time for all modules in minutes (defaults to 60) during serverstart
+      # after that time, the module deployment will be aborted and not all modules will be deployed 
+      serverStartDeployTime: 60
+    # give the days to send a reminder mail x-days before the trial expires
+    planTrialReminderDays: 30,20,10,5,3,2,1
+    # name of the default plan
+    planDefault: Basic
+    # Mandrill API key - only needed if you want to send customized emails via Mandrill;
+    # defaults to null
+    #mandrillApiKey: 
+    mongodb:
+      hosts:
+        # mongodb hosts comma separated for multiple, may have a port after each value,
+        # e.g. "localhost:27017", otherwise the default port 27017 will be used
+        # only the first mongodb host within the comma separated list will be affected by apiOmat's restore and backup functionality
+        default: <statefulset1:27017>,<statefulset2:27017>,<statefulset3:27017>
+        # if this value is not present, the values from default will be used
+        live: <statefulset1:27017>,<statefulset2:27017>,<statefulset3:27017>
+        staging: <statefulset1:27017>,<statefulset2:27017>,<statefulset3:27017>
+        test: <statefulset1:27017>,<statefulset2:27017>,<statefulset3:27017>
+      # Path where to dump the mongodb database of an app, used for RestoreModule;
+      # defaults to System.getProperty("java.io.tmpdir"), which is for example /tmp on Linux
+      # and C:\Users\<YourUser>\AppData\Local\Temp on Windows.
+      # You probably want to set this to /srv/restoreModule on Linux or C:\\mongodb\\restoreModule on Windows
+      #dumpPath:
+      # Path to binary folder of mongodb, used for RestoreModule:
+      # Defaults to empty string, which is fine if it's configured in the PATH
+      #binPath:
+      # number of connections one mongodb-client will establish, 
+      # yambas will create one client per system; default is 100
+      connections: 100
+      #
+      # On startup, there is an additional checkup whether the database is available. This check has a 5 second 
+      # timeout set by default. If there is no response from the database after that time, Yambas responds to any request with
+      # the related errormessage. In most cases these 5 seconds should be enough for the connection timeout, but you
+      # can adjust it here, if the connection needs more time.
+      # Note that the timeout is only set for the test connection. The regular clients use the default timeouts. 
+      testConnectionTimeout: 5
+      # default password for each stage, if no value present, the default will be used
+      # if the password is an empty string, no auth will be used!
+      # defaults to empty string
+      userPassword: 
+        default: supersecretpassword 
+        #live: 
+        #staging: 
+        #test: 
+      # the username to use for a connection to the database; defaults to "apiomat"
+      userName: 
+        default: apiomat
+        #live: 
+        #staging: 
+        #test: 
+      # if the connection to the mongodb requires SSL/TLS encryption, you have to set useSsl to true (default is false)
+      # Note that you maybe have to import the CA-certificate to your java keystore in order to create a valid connection
+      #useSsl: false 
+      # the auth database to use for the authentication, defaults to "admin"
+      authDB: admin
+      # may be one of: "nearest", "primary", "primaryPreferred", "secondary", "secondaryPreferred" 
+      # (without quotes)
+      # defaults to empty;
+      # see https://docs.mongodb.com/manual/core/read-preference/
+      # NOTE: don't use "nearest" if you have an arbiter in your cluster, as this option won't check the members type 
+      #readPreference:
+      #
+      # the write concern may be one of: "ACKNOWLEDGED", "FSYNC_SAFE", "FSYNCED", "JOURNAL_SAFE", "JOURNALED", 
+      # "REPLICA_ACKNOWLEDGED", "REPLICAS_SAFE", "SAFE", "UNACKNOWLEDGED", "MAJORITY" 
+      # (without quotes)
+      # defaults to empty;see https://docs.mongodb.com/v3.2/reference/write-concern/
+      #writeConcern:
+    # FTP server from Webhosting module
+#    ftp:
+      # Path and password to keystore used by SFTP server 
+      #keystore:
+        # if null (unset), the keystore won't be initialized and password will be ignored
+        #path:
+        #password:
+      # Port of FTP server; defaults to 2021
+#      port: 2021
+      # the passive ports to use, may be a single port, e.g. "2300", 
+      # multiple comma-separated "2300,2301", port range e.g. "2300-2305" 
+      # (without end-port means all ports over ...), or a combination, e.g. "2300,2301,2400-"
+      # defaults to 2300
+#      passivePorts: 2300
+    # For access tokens the ApiOmat default is 604800 seconds (1 week); 
+    # Spring DefaultTokenServices default is 43200 seconds (12 hours)
+    # For refresh tokens the ApiOmat and Spring DefaultTokenService default is 2592000 seconds (30 days)
+    oAuth2TokenValiditySeconds:
+      standard:
+        # default are 1 week, value in seconds
+        access: 604800
+        # default are 30 days, value in seconds
+        refresh: 2592000
+      manuallySet:
+        # default are 30 days, value in seconds
+        access: 2592000
+        # default are 1 week, value in seconds
+        refresh: 604800
+    # license must be either a key or a file, there's no internal default
+    license:
+      key: QD3QD-DSP9F-GBPG6-DI2Y3-XQ5A7-VKQGA-A9JER-ZDI7W-GUIIG-ICQ4S-EMLJQ
+      # the absolute path to the license-file, make sure that it is readable by the tomcat-process
+      # example value for unix-based systems: /path/to/file
+      # example value for windows systems: C:\\Users\\YourUser\\AppData\\Local\\ApiOmat\\license.txt
+#      file:
+    git:
+      # behaviour how to react on a conflict in git (changes in dashboard and repository at the same time), 
+      # may be either "branch" (create a branch with dashboard changes) or "force" (force-push changes to current branch)
+      # defaults to "branch"
+      conflictmode: branch
+    # strict authorization checks in nativemodules, false will do less checks and is only allow backward 
+    # compatibility for old nativemodules. defaults to true
+    # NOTE: it may be a security risk to set this to false!
+    strictChecks: true
+
+  # dashboard settings
+  dashboard:
+    #cacheEnabled: true
+    #disableSSLChecks: false
+    # Hide embedded objects switch if set to false
+    #embeddedObjectsSupport: false
+    # sends the verification emails immediately; defaults to false 
+    # (NOTE: this property is deprecated -as also used by yambas- and will be removed in future releases;
+    # use common.sendCustomerVerificationMailImmediately instead!)
+    #sendCustomerVerificationMailImmediately: true
+    #httpsToHttpProxy: true
+    # help URL for Dashboard. Default: /docs,
+    helpUrl: /docs
+    #deployCheckInterval: 
+    #curlRequestTimeout: 
+    # enable/disable CSRF and same origin protection for Dashboard; default: true
+    #csrfpEnabled: true
+
+  # configuration for the monitoring service
+  monitoring:
+    # URL for the discovery service, which is used to connect to monitoring services - 
+    # with this configuration, you also have to set the credentials for the monitoring service
+    #discoveryServiceURL: http://localhost:8500
+    #serviceName: Lurker
+    #user      : user
+    #password  : 'secret'
+    
+  # configuration for provided tools
+  tools:
+    # configuration for the ApiOmat Mobile Studio
+    apiomatStudioMobile:
+      # address where the files for the apiomat studio mobile are deposited
+      appLocation: https://repo.apiomat.com/yambas/rest/web/Tools/LIVE/studiomobile/app/3_1
+      # address where the files for the example projects are deposited
+      templateLocation: https://repo.apiomat.com/yambas/rest/web/Tools/LIVE/studiomobile/template/3_1
+  installerFinished: true
