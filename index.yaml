@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   apiomat-dashboard:
   - appVersion: 3.2.2
-    created: 2018-11-15T13:00:11.337703+01:00
+    created: 2018-11-15T13:14:41.828115+01:00
     description: Dashboard for the ApiOmat rest interface Yambas
     digest: 0c752268c56d7f6fffe65a89abacf04bde3ee492fb8c7b4c9495e7f59b886a3d
     home: https://apiomat.com
@@ -17,11 +17,11 @@ entries:
       name: ApiOmat
     name: apiomat-dashboard
     urls:
-    - apiomat-dashboard-0.2.1.tgz
+    - https://apinautengmbh.github.io/helm/apiomat-dashboard-0.2.1.tgz
     version: 0.2.1
   apiomat-yambas:
   - appVersion: 3.1.2
-    created: 2018-11-15T13:00:11.338724+01:00
+    created: 2018-11-15T13:14:41.829191+01:00
     description: Rest Interface Yambas
     digest: 787f92fc3d57754efa30b9da40f5ebdb778abbbc471a082ba2f8859a4cb68a11
     home: https://apiomat.com
@@ -35,6 +35,6 @@ entries:
       name: ApiOmat
     name: apiomat-yambas
     urls:
-    - apiomat-yambas-0.2.1.tgz
+    - https://apinautengmbh.github.io/helm/apiomat-yambas-0.2.1.tgz
     version: 0.2.1
-generated: 2018-11-15T13:00:11.335679+01:00
+generated: 2018-11-15T13:14:41.826291+01:00
