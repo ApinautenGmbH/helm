@@ -3,15 +3,15 @@
 Look at https://docs.helm.sh/using_helm/
 and init with
 
-# Versions
+# WIP Versions
 
 ## Yambas
 
-[3.1.2](https://apinautengmbh.github.io/helm/apiomat-yambas-0.2.1.tgz)
+[3.1.3](https://apinautengmbh.github.io/helm/apiomat-yambas-wip-3.1.3.tgz)
 
 ## Dashboard
 
-[3.2.2](https://apinautengmbh.github.io/helm/apiomat-dashboard-0.2.1.tgz)
+[3.2.3](https://apinautengmbh.github.io/helm/apiomat-dashboard-wip-3.2.3.tgz)
 
 ```bash
 helm init
