@@ -1,7 +1,3 @@
-## Install helm
-
-Look at https://docs.helm.sh/using_helm/
-and init with
 
 # Versions
 
@@ -16,6 +12,11 @@ and init with
 ```bash
 helm init
 ```
+
+## Install helm
+
+Look at https://docs.helm.sh/using_helm/
+and init with
 
 ## Package helm charts
 
