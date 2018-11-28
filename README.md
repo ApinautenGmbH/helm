@@ -8,7 +8,7 @@
 
 [3.2.3](https://apinautengmbh.github.io/helm/apiomat-dashboard-wip-3.2.3.tgz)
 
-## Install helm
+# Install helm
 
 Look at https://docs.helm.sh/using_helm/
 and init with
