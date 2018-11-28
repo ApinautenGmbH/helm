@@ -9,14 +9,14 @@
 
 [3.2.2](https://apinautengmbh.github.io/helm/apiomat-dashboard-0.2.1.tgz)
 
-```bash
-helm init
-```
-
-## Install helm
+# Helm
 
 Look at https://docs.helm.sh/using_helm/
 and init with
+
+```bash
+helm init
+```
 
 ## Package helm charts
 
