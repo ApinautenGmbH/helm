@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ template "dashboard.name" . }}
-    chart: {{ template "dashboard.chart" . }}
+    app: {{ template "helm.name" . }}
+    chart: {{ template "helm.chart" . }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
-  name: {{ template "dashboard.fullname" . }}
+  name: {{ template "helm.fullname" . }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: {{ template "dashboard.name" . }}
-      chart: {{ template "dashboard.chart" . }}
+      app: {{ template "helm.name" . }}
+      chart: {{ template "helm.chart" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "dashboard.name" . }}
-        chart: {{ template "dashboard.chart" . }}
+        app: {{ template "helm.name" . }}
+        chart: {{ template "helm.chart" . }}
         release: {{ .Release.Name }}
       {{- if .Values.podAnnotations }}
       annotations:
@@ -36,36 +36,15 @@ spec:
       {{- end}}
       {{- end }}
       containers:
-      - name: {{ template "dashboard.name" . }}
-        image: {{ template "dashboard.image" . }}
+      - name: {{ template "helm.name" . }}
+        image: {{ template "helm.image" . }}
+        command:
+        {{- range .Values.configuration }}
+          - {{ . }}
+        {{- end}}
         ports: 
-        - containerPort: 8000
-          name: http
-        env:
-        {{- if .Values.ajp.enabled }}
-        - name: YAMBAS_EXTERNAL
-          value: {{ .Values.ajp.domain | quote }}
-        - name: YAMBAS_EXTERNAL_PORT
-          value: {{ .Values.ajp.port | quote }}
-        {{- end }}
-        - name: DEBUG
-          value: {{ .Values.debug | default "false" | quote }}
-        {{- if .Values.alias }}
-        {{- if .Values.alias.normal }}
-        - name: ALIAS
-          value: {{ .Values.alias.normal | quote }}
-        {{- end }}
-        {{- if .Values.alias.proxy }}
-        - name: ALIAS_PROXY
-          value: {{ .Values.alias.proxy | quote }}
-        {{- end }}
-        {{- end }}
-        - name: ENV_MODE
-          value: {{ .Values.environmentMode | default "PRODUCTION" | upper | quote }}
-        {{- if .Values.configmap }}
-        - name: USE_EXISTING_CONFIG
-          value: "true"
-        {{- end }}
+        - containerPort: {{ template "helm.port" . }}
+          name: ms-port
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         {{- if .Values.livenessProbe.enabled }}
@@ -90,19 +69,7 @@ spec:
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
         {{- end }}
-        {{- if .Values.configmap }}
-        volumeMounts:
-        - name: config
-          mountPath: /etc/apiomat/apiomat.yaml
-          subPath: apiomat.yaml
-        {{- end }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         securityContext:
           capabilities: {  }
           privileged: false
-      {{- if .Values.configmap }}
-      volumes:
-      - name: config
-        configMap:
-          name: {{ template "dashboard.fullname" . }}
-      {{- end }}
