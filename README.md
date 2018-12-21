@@ -2,11 +2,11 @@
 
 ## Yambas
 
-[3.1.3](https://apinautengmbh.github.io/helm/apiomat-yambas-wip-3.1.3.tgz)
+[3.2.0](https://apinautengmbh.github.io/helm/apiomat-yambas-3.2.0.tgz)
 
 ## Dashboard
 
-[3.2.3](https://apinautengmbh.github.io/helm/apiomat-dashboard-wip-3.2.3.tgz)
+[3.2.4](https://apinautengmbh.github.io/helm/apiomat-dashboard-3.2.4.tgz)
 
 # Helm
 
@@ -22,12 +22,15 @@ helm init
 ```bash
 helm package apiomat-yambas
 helm package apiomat-dashboard
+helm package apiomat-lurker
+helm package apiomat-instructor
+helm package apiomat-explorer
 ```
 
 ## Create repo index
 
 ```bash
-helm repo index .
+helm repo index . --url https://<repo_full_url>
 ```
 
 ## Install prerequisites helm charts
@@ -44,4 +47,10 @@ curl -X POST http://localhost:8081/yambas/rest/initSuperAdmin -d "email=apinaut@
 
 
 helm install --values apiomat-dashboard/values.yaml apiomat-dashboard/ --name "apiomat-dashboard"
+
+helm install --values apiomat-lurker/values.yaml apiomat-lurker/ --name "apiomat-lurker"
+
+helm install --values apiomat-instructor/values.yaml apiomat-instructor/ --name "apiomat-instructor"
+
+helm install --values apiomat-explorer/values.yaml apiomat-explorer/ --name "apiomat-explorer"
 ```
