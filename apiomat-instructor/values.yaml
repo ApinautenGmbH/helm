@@ -19,7 +19,7 @@ image:
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
   ##
   pullSecrets:
-    - <your-nickname>
+    - <regcred>
 
 replicas: 1
 
@@ -48,10 +48,10 @@ podAnnotations: {}
 resources:
  limits:
 #   cpu: 500m
-   memory: 1Gi
+    memory: 1Gi
  requests:
 #   cpu: 100m
-   memory: 512Mi
+    memory: 1Gi
 
 ## Node selector
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
@@ -84,5 +84,5 @@ readinessProbe:
 
 # Entries for the Instructor config file
 configuration:
-#  - --spring.cloud.consul.enabled=false
+  - --spring.cloud.consul.enabled=false
   
