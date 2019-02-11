@@ -40,3 +40,11 @@ Return the proper image name
 {{- $tag := .Values.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+{{- define "helm.port" -}}
+{{- printf "8081" -}}
+{{- end -}}
+
+{{- define "helm.healthcheckURL" -}}
+{{- printf "/yambas/rest" -}}
+{{- end -}}

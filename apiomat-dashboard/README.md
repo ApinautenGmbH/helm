@@ -23,7 +23,7 @@ Shoud return something similar to:
 Name:                     apiomat-dashboard
 Namespace:                apiomat
 Labels:                   app=apiomat-dashboard
-                          chart=apiomat-dashboard-0.2.1
+                          chart=apiomat-dashboard-x.x.x
                           heritage=Tiller
                           release=apiomat-dashboard
 Annotations:              traefik.backend.loadbalancer.method: drr

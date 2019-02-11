@@ -2,13 +2,13 @@ image:
   ## ApiOmat Registry Url
   ##
   registry: docker.io
-  ## ApiOmat Dashboard image name
+  ## ApiOmat Yambas image name
   ##
-  repository: apiomat/alpine-yambas
+  repository: apiomat/yambas
   ## ApiOmat Dashboard image tag
-  ## ref: https://hub.docker.com/r/apiomat/alpine-dashboard/tags/
+  ## ref: https://hub.docker.com/r/apiomat/yambas/tags/
   ##
-  tag: 3.1.2
+  tag: 3.2.0
 
   ## Specify a imagePullPolicy
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -19,7 +19,7 @@ image:
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
   ##
   pullSecrets:
-    - <your-nickname>
+    - <regcred>
 
 replicas: 2
 
@@ -55,7 +55,7 @@ service:
   ##
   # nodePort:
 
-# Annotations to be added to Dashboard pods
+# Annotations to be added to yambas pods
 podAnnotations: {}
 
 ## Configure resource requests and limits
@@ -250,11 +250,11 @@ configmap:
         # mongodb hosts comma separated for multiple, may have a port after each value,
         # e.g. "localhost:27017", otherwise the default port 27017 will be used
         # only the first mongodb host within the comma separated list will be affected by apiOmat's restore and backup functionality
-        default: <statefulset1:27017>,<statefulset2:27017>,<statefulset3:27017>
+        default: <mongodb_statefulset1:27017>,<mongodb_statefulset2:27017>,<mongodb_statefulset3:27017>
         # if this value is not present, the values from default will be used
-        live: <statefulset1:27017>,<statefulset2:27017>,<statefulset3:27017>
-        staging: <statefulset1:27017>,<statefulset2:27017>,<statefulset3:27017>
-        test: <statefulset1:27017>,<statefulset2:27017>,<statefulset3:27017>
+        live: <mongodb_statefulset1:27017>,<mongodb_statefulset2:27017>,<mongodb_statefulset3:27017>
+        staging: <mongodb_statefulset1:27017>,<mongodb_statefulset2:27017>,<mongodb_statefulset3:27017>
+        test: <mongodb_statefulset1:27017>,<mongodb_statefulset2:27017>,<mongodb_statefulset3:27017>
       # Path where to dump the mongodb database of an app, used for RestoreModule;
       # defaults to System.getProperty("java.io.tmpdir"), which is for example /tmp on Linux
       # and C:\Users\<YourUser>\AppData\Local\Temp on Windows.
@@ -381,7 +381,7 @@ configmap:
     # configuration for the ApiOmat Mobile Studio
     apiomatStudioMobile:
       # address where the files for the apiomat studio mobile are deposited
-      appLocation: https://repo.apiomat.com/yambas/rest/web/Tools/LIVE/studiomobile/app/3_1
+      appLocation: https://repo.apiomat.com/yambas/rest/web/Tools/LIVE/studiomobile/app/3_2
       # address where the files for the example projects are deposited
-      templateLocation: https://repo.apiomat.com/yambas/rest/web/Tools/LIVE/studiomobile/template/3_1
+      templateLocation: https://repo.apiomat.com/yambas/rest/web/Tools/LIVE/studiomobile/template/3_2
   installerFinished: true

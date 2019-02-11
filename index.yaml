@@ -1,10 +1,10 @@
 apiVersion: v1
 entries:
   apiomat-dashboard:
-  - appVersion: 3.2.2
-    created: 2018-11-28T08:50:06.120695+01:00
+  - appVersion: 3.2.4
+    created: 2018-12-21T14:50:20.172215+01:00
     description: Dashboard for the ApiOmat rest interface Yambas
-    digest: 0c752268c56d7f6fffe65a89abacf04bde3ee492fb8c7b4c9495e7f59b886a3d
+    digest: 6031748b8858700f591ebc899eaf86c06cadc5b7622297d7ea1e48e904d45110
     home: https://apiomat.com
     keywords:
     - dashboard
@@ -17,13 +17,74 @@ entries:
       name: ApiOmat
     name: apiomat-dashboard
     urls:
-    - https://apinautengmbh.github.io/helm/apiomat-dashboard-0.2.1.tgz
-    version: 0.2.1
+    - https://apinautengmbh.github.io/helm/apiomat-dashboard-3.2.4.tgz
+    version: 3.2.4
+  apiomat-explorer:
+  - appVersion: 1.1.0
+    created: 2018-12-21T14:50:20.172685+01:00
+    description: Explorer for the ApiOmat rest interface Yambas
+    digest: dc0ec1a3bc9b5404711a8c9f26e78536ba85e8ca8ccb5bd6eed841e61337e9f1
+    home: https://apiomat.com
+    keywords:
+    - explorer
+    - apidocs
+    - apiomat
+    - backend
+    - lowcode
+    - yambas
+    maintainers:
+    - email: containers@apiomat.com
+      name: ApiOmat
+    name: apiomat-explorer
+    urls:
+    - https://apinautengmbh.github.io/helm/apiomat-explorer-1.1.0.tgz
+    version: 1.1.0
+  apiomat-instructor:
+  - appVersion: 1.1.0
+    created: 2018-12-21T14:50:20.17304+01:00
+    description: Instructor for the ApiOmat rest interface Yambas
+    digest: 13e607098c6b1bbc1a631a026603631d33c5a43e33450aef0927c019de81db10
+    home: https://apiomat.com
+    keywords:
+    - inctructor
+    - docs
+    - documentation
+    - apiomat
+    - backend
+    - lowcode
+    - yambas
+    maintainers:
+    - email: containers@apiomat.com
+      name: ApiOmat
+    name: apiomat-instructor
+    urls:
+    - https://apinautengmbh.github.io/helm/apiomat-instructor-1.1.0.tgz
+    version: 1.1.0
+  apiomat-lurker:
+  - appVersion: 1.1.0
+    created: 2018-12-21T14:50:20.173389+01:00
+    description: Monitoring for the ApiOmat rest interface Yambas
+    digest: e5410e968584349fc5788d1a74375aba415b81553153b0a86ba11bf1672d7818
+    home: https://apiomat.com
+    keywords:
+    - lurker
+    - monitoring
+    - apiomat
+    - backend
+    - lowcode
+    - yambas
+    maintainers:
+    - email: containers@apiomat.com
+      name: ApiOmat
+    name: apiomat-lurker
+    urls:
+    - https://apinautengmbh.github.io/helm/apiomat-lurker-1.1.0.tgz
+    version: 1.1.0
   apiomat-yambas:
-  - appVersion: 3.1.2
-    created: 2018-11-28T08:50:06.121221+01:00
+  - appVersion: 3.2.0
+    created: 2018-12-21T14:50:20.173892+01:00
     description: Rest Interface Yambas
-    digest: 787f92fc3d57754efa30b9da40f5ebdb778abbbc471a082ba2f8859a4cb68a11
+    digest: 10930c13659abc7c85d533cdb3fd44c5f4a87d950f228b5c7895f837ec291223
     home: https://apiomat.com
     keywords:
     - apiomat
@@ -35,6 +96,6 @@ entries:
       name: ApiOmat
     name: apiomat-yambas
     urls:
-    - https://apinautengmbh.github.io/helm/apiomat-yambas-0.2.1.tgz
-    version: 0.2.1
-generated: 2018-11-28T08:50:06.118766+01:00
+    - https://apinautengmbh.github.io/helm/apiomat-yambas-3.2.0.tgz
+    version: 3.2.0
+generated: 2018-12-21T14:50:20.170648+01:00

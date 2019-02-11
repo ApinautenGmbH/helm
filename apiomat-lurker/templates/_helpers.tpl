@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "dashboard.name" -}}
+{{- define "helm.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "dashboard.fullname" -}}
+{{- define "helm.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -27,14 +27,14 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "dashboard.chart" -}}
+{{- define "helm.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Return the proper image name
 */}}
-{{- define "dashboard.image" -}}
+{{- define "helm.image" -}}
 {{- $registryName :=  .Values.image.registry -}}
 {{- $repositoryName := .Values.image.repository -}}
 {{- $tag := .Values.image.tag | toString -}}
@@ -42,9 +42,9 @@ Return the proper image name
 {{- end -}}
 
 {{- define "helm.port" -}}
-{{- printf "8000" -}}
+{{- printf "8090" -}}
 {{- end -}}
 
 {{- define "helm.healthcheckURL" -}}
-{{- printf "/site/login" -}}
+{{- printf "/lurker" -}}
 {{- end -}}
