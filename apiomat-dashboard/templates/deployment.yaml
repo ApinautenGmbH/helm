@@ -44,9 +44,9 @@ spec:
         env:
         {{- if .Values.ajp.enabled }}
         - name: YAMBAS_EXTERNAL
-          value: {{ .Values.ajp.domain | quote }}
+          value: {{ .Values.ajp.domain | default "apiomat-yambas" | quote }}
         - name: YAMBAS_EXTERNAL_PORT
-          value: {{ .Values.ajp.port | quote }}
+          value: {{ .Values.ajp.port | default "10009" | quote }}
         {{- end }}
         - name: DEBUG
           value: {{ .Values.debug | default "false" | quote }}

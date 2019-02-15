@@ -11,4 +11,8 @@ metadata:
 data:
   apiomat.yaml: |-
 {{ toYaml .Values.configmap | indent 4 }}
+{{- if .Values.configmap.installerFinished }}
+{{- else }}
+    installerFinished: true
+{{- end }}    
 {{- end }}

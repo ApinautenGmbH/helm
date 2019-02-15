@@ -16,7 +16,7 @@ spec:
   - name: http
     port: 8000
     protocol: TCP
-  type: {{.Values.service.type }}
+  type: {{.Values.service.type | default "ClusterIP" | quote}}
   selector:
     app: {{ template "dashboard.name" . }}
     release: {{ .Release.Name }}

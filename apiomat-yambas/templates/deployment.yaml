@@ -57,19 +57,19 @@ spec:
           name: ftp-passive
         env:
         - name: JAVA_XMS
-          value: {{ .Values.javaxms | quote }}
+          value: {{ .Values.javaxms | default "4096m" | quote }}
         {{- if .Values.hazelcast }}
         - name: HAZELCAST_DISCOVERY
-          value: {{ .Values.hazelcast.discovery | quote }}
+          value: {{ .Values.hazelcast.discovery | default "none" | quote }}
         - name: HAZELCAST_USERNAME
-          value: {{ .Values.hazelcast.username | quote }}
+          value: {{ .Values.hazelcast.username | default "" | quote }}
         - name: HAZELCAST_PASSWORD
-          value: {{ .Values.hazelcast.password | quote }}
+          value: {{ .Values.hazelcast.password | default "" | quote }}
         {{- if .Values.hazelcast.consul }}
         - name: CONSUL_HOST
-          value: {{ .Values.hazelcast.consul.host | default "consul-ui" | quote }}
+          value: {{ .Values.hazelcast.consul.host | default "" | quote }}
         - name: CONSUL_PORT
-          value: {{ .Values.hazelcast.consul.port | default "8500" | quote }}
+          value: {{ .Values.hazelcast.consul.port | default "" | quote }}
         - name: CONSUL_SERVICE
           value: {{ .Values.hazelcast.consul.service | default "apiomat" | quote }}
         - name: CONSUL_DELAY_MS

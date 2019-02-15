@@ -21,7 +21,7 @@ spec:
     port: 10009
     protocol: TCP
     targetPort: 10009
-  type: {{.Values.service.type }}
+  type: {{ .Values.service.type | default "ClusterIP" | quote }}
   selector:
     app: {{ template "yambas.name" . }}
     release: {{ .Release.Name }}
