@@ -1,4 +1,4 @@
-# WIP Versions
+# Versions
 
 ## Yambas
 
