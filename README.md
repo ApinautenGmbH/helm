@@ -57,3 +57,7 @@ helm install --values apiomat-instructor/values.yaml apiomat-instructor/ --name 
 
 helm install --values apiomat-explorer/values.yaml apiomat-explorer/ --name "apiomat-explorer"
 ```
+
+## REPO
+
+[Github](https://github.com/ApinautenGmbH/helm)
