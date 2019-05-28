@@ -59,10 +59,10 @@ podAnnotations: {}
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ##
 resources:
- limits:
+  limits:
 #   cpu: 500m
     memory: 1Gi
- requests:
+  requests:
 #   cpu: 100m
     memory: 512Mi
 
