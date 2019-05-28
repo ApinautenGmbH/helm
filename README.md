@@ -3,10 +3,11 @@
 ## Yambas
 
 [3.2.0](https://apinautengmbh.github.io/helm/apiomat-yambas-3.2.0.tgz)
+[3.2.1](https://helm.apiomat.com/apiomat-yambas-3.2.1-0.tgz)
 
 ## Dashboard
 
-[3.2.4](https://apinautengmbh.github.io/helm/apiomat-dashboard-3.2.4.tgz)
+[3.2.4](https://helm.apiomat.com/apiomat-dashboard-3.2.4-0.tgz)
 
 # Helm
 
@@ -34,12 +35,14 @@ helm repo index . --url https://<repo_full_url>
 ```
 
 ## Install prerequisites helm charts
+
 ```bash
 helm install --values mongodb-values.yaml stable/mongodb-replicaset --name "apiomat-mongodb"
 helm install --values consul-values.yaml stable/consul --name "apiomat-consul" --namespace apiomat
 ```
 
 ## Install apiomat helm charts
+
 ```bash
 helm install --values yambas-values.yaml  apiomat-yambas/ --name "apiomat-yambas" --namespace apiomat
 # exec into one yambas container and run following command
