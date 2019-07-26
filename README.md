@@ -1,15 +1,34 @@
-# Versions
+# Helm
 
-## Yambas
+## Versions
+
+### Yambas
 
 [3.2.0](https://apinautengmbh.github.io/helm/apiomat-yambas-3.2.0.tgz)
 [3.2.1](https://helm.apiomat.com/apiomat-yambas-3.2.1-0.tgz)
 
-## Dashboard
+### Dashboard
 
 [3.2.4](https://helm.apiomat.com/apiomat-dashboard-3.2.4-0.tgz)
+[3.2.5](https://helm.apiomat.com/apiomat-dashboard-3.2.5.tgz)
 
-# Helm
+### Lurker
+
+[1.1.0](https://helm.apiomat.com/apiomat-lurker1.1.0.tgz)
+
+### Instructer
+
+[1.1.0](https://helm.apiomat.com/apiomat-instructor-1.1.0.tgz)
+
+### Explorer
+
+[1.1.0](https://helm.apiomat.com/apiomat-explorer-1.1.0.tgz)
+
+### Dispatcher
+
+[1.0.0](https://helm.apiomat.com/apiomat-dispatcher-1.0.0.tgz)
+
+## Initialize helm
 
 Look at https://docs.helm.sh/using_helm/
 and init with
@@ -26,6 +45,7 @@ helm package apiomat-dashboard
 helm package apiomat-lurker
 helm package apiomat-instructor
 helm package apiomat-explorer
+helm package apiomat-dispatcher
 ```
 
 ## Create repo index
@@ -56,6 +76,8 @@ helm install --values apiomat-lurker/values.yaml apiomat-lurker/ --name "apiomat
 helm install --values apiomat-instructor/values.yaml apiomat-instructor/ --name "apiomat-instructor"
 
 helm install --values apiomat-explorer/values.yaml apiomat-explorer/ --name "apiomat-explorer"
+
+helm install --values apiomat-dispatcher/values.yaml apiomat-explorer/ --name "apiomat-dispatcher"
 ```
 
 ## REPO
