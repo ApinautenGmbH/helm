@@ -1,6 +1,6 @@
 name: apiomat-dashboard
-version: 3.2.4-0
-appVersion: 3.2.4
+version: 3.2.5-0
+appVersion: 3.2.5
 description: Dashboard for the ApiOmat rest interface Yambas
 keywords:
 - dashboard

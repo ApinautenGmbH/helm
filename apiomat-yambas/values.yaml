@@ -8,7 +8,7 @@ image:
   ## ApiOmat Dashboard image tag
   ## ref: https://hub.docker.com/r/apiomat/yambas/tags/
   ##
-  tag: 3.2.1
+  tag: 3.3.0
 
   ## Specify a imagePullPolicy
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images

@@ -4,10 +4,12 @@
 
 [3.2.0](https://apinautengmbh.github.io/helm/apiomat-yambas-3.2.0.tgz)
 [3.2.1](https://helm.apiomat.com/apiomat-yambas-3.2.1-0.tgz)
+[3.3.0](https://helm.apiomat.com/apiomat-yambas-3.3.0-0.tgz)
 
 ## Dashboard
 
 [3.2.4](https://helm.apiomat.com/apiomat-dashboard-3.2.4-0.tgz)
+[3.2.5](https://helm.apiomat.com/apiomat-dashboard-3.2.5-0.tgz)
 
 # Helm
 
