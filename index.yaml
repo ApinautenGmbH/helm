@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   apiomat-dashboard:
   - appVersion: 3.2.4
-    created: "2019-05-28T16:25:16.145118+02:00"
+    created: "2019-07-26T10:59:32.910607+02:00"
     description: Dashboard for the ApiOmat rest interface Yambas
     digest: d5af71cab0fe576a2bb2c1a6a4abb8860e5c049f4fc760ced4dc7dd6534fc86a
     home: https://apiomat.com
@@ -20,7 +20,7 @@ entries:
     - https://helm.apiomat.com/apiomat-dashboard-3.2.5.tgz
     version: 3.2.5
   - appVersion: 3.2.4
-    created: "2019-05-28T16:25:16.143488+02:00"
+    created: "2019-07-26T10:59:32.909562+02:00"
     description: Dashboard for the ApiOmat rest interface Yambas
     digest: 6031748b8858700f591ebc899eaf86c06cadc5b7622297d7ea1e48e904d45110
     home: https://apiomat.com
@@ -38,7 +38,7 @@ entries:
     - https://helm.apiomat.com/apiomat-dashboard-3.2.4.tgz
     version: 3.2.4
   - appVersion: 3.2.4
-    created: "2019-05-28T16:25:16.142196+02:00"
+    created: "2019-07-26T10:59:32.908588+02:00"
     description: Dashboard for the ApiOmat rest interface Yambas
     digest: 2f35edf3becc52898e944966d031dc5f66c035d18bea8502df3d021ac968873e
     home: https://apiomat.com
@@ -55,9 +55,29 @@ entries:
     urls:
     - https://helm.apiomat.com/apiomat-dashboard-3.2.4-0.tgz
     version: 3.2.4-0
+  apiomat-dispatcher:
+  - appVersion: 1.0.0
+    created: "2019-07-26T10:59:32.91093+02:00"
+    description: Dispatcher for the ApiOmat rest interface Yambas
+    digest: 2c7f2b544fd8e55179ede8708ad7b802cee60906f3752eb77ac71755be552840
+    home: https://apiomat.com
+    keywords:
+    - dispatcher
+    - gateway
+    - apiomat
+    - backend
+    - lowcode
+    - yambas
+    maintainers:
+    - email: containers@apiomat.com
+      name: ApiOmat
+    name: apiomat-dispatcher
+    urls:
+    - https://helm.apiomat.com/apiomat-dispatcher-1.0.0.tgz
+    version: 1.0.0
   apiomat-explorer:
   - appVersion: 1.1.0
-    created: "2019-05-28T16:25:16.145912+02:00"
+    created: "2019-07-26T10:59:32.911452+02:00"
     description: Explorer for the ApiOmat rest interface Yambas
     digest: dc0ec1a3bc9b5404711a8c9f26e78536ba85e8ca8ccb5bd6eed841e61337e9f1
     home: https://apiomat.com
@@ -77,7 +97,7 @@ entries:
     version: 1.1.0
   apiomat-instructor:
   - appVersion: 1.1.0
-    created: "2019-05-28T16:25:16.146873+02:00"
+    created: "2019-07-26T10:59:32.911964+02:00"
     description: Instructor for the ApiOmat rest interface Yambas
     digest: 13e607098c6b1bbc1a631a026603631d33c5a43e33450aef0927c019de81db10
     home: https://apiomat.com
@@ -98,7 +118,7 @@ entries:
     version: 1.1.0
   apiomat-lurker:
   - appVersion: 1.1.0
-    created: "2019-05-28T16:25:16.147459+02:00"
+    created: "2019-07-26T10:59:32.912455+02:00"
     description: Monitoring for the ApiOmat rest interface Yambas
     digest: e5410e968584349fc5788d1a74375aba415b81553153b0a86ba11bf1672d7818
     home: https://apiomat.com
@@ -118,7 +138,7 @@ entries:
     version: 1.1.0
   apiomat-yambas:
   - appVersion: 3.2.0
-    created: "2019-05-28T16:25:16.151182+02:00"
+    created: "2019-07-26T10:59:32.917444+02:00"
     description: Rest Interface Yambas
     digest: 2defa95b95ec5713bb5e1c219df716ca1734e98df9647f1d7c1b83763b234610
     home: https://apiomat.com
@@ -135,7 +155,7 @@ entries:
     - https://helm.apiomat.com/apiomat-yambas-3.2.1.tgz
     version: 3.2.1
   - appVersion: 3.2.1
-    created: "2019-05-28T16:25:16.149328+02:00"
+    created: "2019-07-26T10:59:32.91613+02:00"
     description: Rest Interface Yambas
     digest: 32b2750d62c1c0f1dcbaccb70ea4b7e23b40f43bb23f3c491a891266a851eb7a
     home: https://apiomat.com
@@ -152,7 +172,7 @@ entries:
     - https://helm.apiomat.com/apiomat-yambas-3.2.1-0.tgz
     version: 3.2.1-0
   - appVersion: 3.2.0
-    created: "2019-05-28T16:25:16.148593+02:00"
+    created: "2019-07-26T10:59:32.914341+02:00"
     description: Rest Interface Yambas
     digest: 10930c13659abc7c85d533cdb3fd44c5f4a87d950f228b5c7895f837ec291223
     home: https://apiomat.com
@@ -168,4 +188,4 @@ entries:
     urls:
     - https://helm.apiomat.com/apiomat-yambas-3.2.0.tgz
     version: 3.2.0
-generated: "2019-05-28T16:25:16.140407+02:00"
+generated: "2019-07-26T10:59:32.907393+02:00"
