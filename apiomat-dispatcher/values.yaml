@@ -2,13 +2,13 @@ image:
   ## ApiOmat Registry Url
   ##
   registry: docker.io
-  ## ApiOmat Lurker image name
+  ## ApiOmat Dispatcher image name
   ##
-  repository: apiomat/lurker
-  ## ApiOmat Lurker image tag
-  ## ref: https://hub.docker.com/r/apiomat/lurker/tags/
+  repository: apiomat/dispatcher
+  ## ApiOmat Dispatcher image tag
+  ## ref: https://hub.docker.com/r/apiomat/dispatcher/tags/
   ##
-  tag: 1.1.0
+  tag: 1.0.0
 
   ## Specify a imagePullPolicy
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -29,7 +29,7 @@ ingress:
 #    kubernetes.io/ingress.class: "traefik"
   path: /
   hosts:
-    - lurker.example.domain
+    - example.domain
 
 ## Kubernetes service type
 service:
@@ -39,7 +39,7 @@ service:
 #    traefik.frontend.passHostHeader: "true"
   type: NodePort
 
-# Annotations to be added to Lurker pods
+# Annotations to be added to Dispatcher pods
 podAnnotations: {}
 
 ## Configure resource requests and limits
@@ -48,10 +48,10 @@ podAnnotations: {}
 resources:
  limits:
 #   cpu: 500m
-   memory: 4Gi
+    memory: 1Gi
  requests:
 #   cpu: 100m
-   memory: 4Gi
+    memory: 1Gi
 
 ## Node selector
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
@@ -82,6 +82,6 @@ readinessProbe:
   failureThreshold: 6
   successThreshold: 1
 
-# Entries for the Lurker config file
+# Entries for the Dispatcher config file
 configuration:
-  - --spring.cloud.consul.enabled=true --spring.cloud.consul.host=internalurltoconsul --spring.cloud.consul.port=8500  
+  - --spring.cloud.consul.enabled=true --spring.cloud.consul.host=internalurltoconsul --spring.cloud.consul.port=8500

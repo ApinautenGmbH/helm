@@ -73,6 +73,26 @@ entries:
     urls:
     - https://helm.apiomat.com/apiomat-dashboard-3.2.4-0.tgz
     version: 3.2.4-0
+  apiomat-dispatcher:
+  - appVersion: 1.0.0
+    created: "2019-07-26T10:59:32.91093+02:00"
+    description: Dispatcher for the ApiOmat rest interface Yambas
+    digest: 2c7f2b544fd8e55179ede8708ad7b802cee60906f3752eb77ac71755be552840
+    home: https://apiomat.com
+    keywords:
+    - dispatcher
+    - gateway
+    - apiomat
+    - backend
+    - lowcode
+    - yambas
+    maintainers:
+    - email: containers@apiomat.com
+      name: ApiOmat
+    name: apiomat-dispatcher
+    urls:
+    - https://helm.apiomat.com/apiomat-dispatcher-1.0.0.tgz
+    version: 1.0.0
   apiomat-explorer:
   - appVersion: 1.1.0
     created: "2019-07-26T15:12:02.874887+02:00"
